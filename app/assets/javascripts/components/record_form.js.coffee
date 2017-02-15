@@ -5,6 +5,7 @@
     title: ''
     date: ''
     amount: ''
+    user_id: ''
   # handler method called on keystroke
   # this handler will use the name attribute to detect the input triggered and update the state value
   handleChange: (e) ->
@@ -23,8 +24,7 @@
     # success callback
     $.post '', { record: @state }, (data) =>
       @props.handleNewRecord data
-      @setState @getInitialState(),
-      'JSON'
+      @setState @getInitialState(), @valid
   render: ->
     React.DOM.form
       className: 'form-inline'

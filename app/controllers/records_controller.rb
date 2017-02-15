@@ -1,5 +1,6 @@
 # handles CRUD for Records
 class RecordsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_record, only: [:destroy, :update]
 
   def index
@@ -7,7 +8,7 @@ class RecordsController < ApplicationController
   end
 
   def create
-    @record = Record.new(record_params)
+    @record = current_user.records.build(record_params)
 
     if @record.save
       render json: @record
@@ -35,6 +36,6 @@ class RecordsController < ApplicationController
     end
 
     def record_params
-      params.require(:record).permit(:title, :amount, :date)
+      params.require(:record).permit(:title, :amount, :date, :user_id)
     end
 end

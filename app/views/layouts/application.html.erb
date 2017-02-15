@@ -10,9 +10,17 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1" >
+    <% if current_user %>
+      Logged in as <%= current_user.email %>
+    <% end %>
   </head>
 
   <body>
+  <% if notice %>
+    <p class="notice"><%= notice %></p>
+  <% else %>
+    <p class="alert"><%= alert %></p>
+  <% end %>
     <%= yield %>
   </body>
 </html>
